@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: training-api
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: lazy
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      connection-test-query: SELECT 1
+      register-mbeans: true
+    platform: mssql
+    # temporary url, username and password are hardcoded
+    url: jdbc:sqlserver://localhost:1433;databaseName=training
+    username: SA
+    password: "@Trainingv1"
+  flyway:
+    schemas: training
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    open-in-view: false
+    properties:
+      hibernate:
+        default_schema: training
+      javax:
+        persistence:
+          lock:
+            timeout: 2000
+          validation:
+            mode: none
+    show-sql: false
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
