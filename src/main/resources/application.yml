@@ -32,6 +32,8 @@ spring:
           validation:
             mode: none
     show-sql: false
+    hibernate:
+      ddl-auto: validate
   main:
     allow-bean-definition-overriding: true
 
