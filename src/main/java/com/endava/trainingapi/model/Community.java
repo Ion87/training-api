@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 @Getter
 @AllArgsConstructor
@@ -26,6 +27,7 @@ public class Community {
     @Id
     @Column(name = "id", columnDefinition = "VARCHAR(36) NOT NULL")
     @GeneratedValue
+    @Type(type = "uuid-char")
     private UUID id;
 
     @Column(name = "name")
