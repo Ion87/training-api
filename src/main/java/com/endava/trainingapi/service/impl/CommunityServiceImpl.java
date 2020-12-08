@@ -10,7 +10,11 @@ import com.endava.trainingapi.service.CommunityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 import java.util.UUID;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -20,6 +24,14 @@ public class CommunityServiceImpl implements CommunityService {
     private final CommunityRepository repository;
     private final CommunityDtoToCommunityConverter communityDtoToCommunityConverter;
     private final CommunityToCommunityDtoConverter communityToCommunityDtoConverter;
+
+    @Override
+    public List<CommunityDto> getAll() {
+        return repository.findAll()
+            .stream()
+            .map(communityToCommunityDtoConverter::convert)
+            .collect(Collectors.toList());
+    }
 
     @Override
     public CommunityDto save(CommunityDto communityDto) {
