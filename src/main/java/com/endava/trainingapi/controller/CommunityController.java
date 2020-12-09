@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,4 +45,9 @@ public class CommunityController {
         communityService.deleteById(id);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CommunityDto> update(@Valid @PathVariable("id") UUID id,
+                                                    @Valid @RequestBody CommunityDto communityDto) {
+        return ResponseEntity.ok(communityService.updateById(id, communityDto));
+    }
 }
