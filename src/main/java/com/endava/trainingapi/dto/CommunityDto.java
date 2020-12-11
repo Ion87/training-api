@@ -18,7 +18,8 @@ import java.util.UUID;
 public class CommunityDto {
     private UUID id;
 
-    @NotNull
-    @Size(min = 2)
+    @NotNull(message = "Name must not be null")
+    @Size(min = 2, message = "Size of name must be at least 2")
     private String name;
+
 }

@@ -30,9 +30,9 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<CommunityDto> getAll() {
         return repository.findAll()
-            .stream()
-            .map(communityToCommunityDtoConverter::convert)
-            .collect(Collectors.toList());
+                .stream()
+                .map(communityToCommunityDtoConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -44,11 +44,10 @@ public class CommunityServiceImpl implements CommunityService {
 
     @Override
     public void deleteById(UUID id) throws AppEntityNotFoundException {
-        if (repository.existsById(id)){
+        if (repository.existsById(id)) {
             repository.deleteById(id);
-        }
-        else {
-            throw new AppEntityNotFoundException();
+        } else {
+            throw new AppEntityNotFoundException(String.format("Community %s was not found.", id));
         }
     }
 
