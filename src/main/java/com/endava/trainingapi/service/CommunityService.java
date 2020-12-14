@@ -11,4 +11,5 @@ public interface CommunityService {
     List<CommunityDto> getAll();
     CommunityDto save(CommunityDto communityDto);
     void deleteById(UUID id)throws AppEntityNotFoundException;
+    public CommunityDto updateById(UUID id, CommunityDto dto);
 }

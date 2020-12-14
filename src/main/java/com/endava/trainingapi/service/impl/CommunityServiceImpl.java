@@ -9,8 +9,10 @@ import com.endava.trainingapi.repository.CommunityRepository;
 import com.endava.trainingapi.service.CommunityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Optional;
 import java.util.UUID;
 
 import java.util.List;
@@ -48,5 +50,18 @@ public class CommunityServiceImpl implements CommunityService {
         else {
             throw new AppEntityNotFoundException();
         }
+    }
+
+    @Transactional
+    @Override
+    public CommunityDto updateById(UUID id, CommunityDto dto) throws AppEntityNotFoundException {
+        return repository.findById(id)
+                .map(community -> {
+                    community.setName(dto.getName());
+                    return community;
+                })
+                .map(repository::save)
+                .map(communityToCommunityDtoConverter::convert)
+                .orElseThrow(AppEntityNotFoundException::new);
     }
 }
