@@ -2,13 +2,11 @@ package com.endava.trainingapi.model;
 
 import org.hibernate.annotations.Type;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +32,6 @@ public class Role {
     @Column(name = "name")
     private String name;
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 }
